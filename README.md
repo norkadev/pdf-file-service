@@ -33,3 +33,6 @@ mvn clean install
 ``` 
 5. Access the API documentation at:
 6. Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8181/swagger-ui.html)
+
+
+![img.png](img.png)

@@ -3,6 +3,9 @@ package com.norkadev.pdf_file_service.controller;
 import com.norkadev.pdf_file_service.model.File;
 import com.norkadev.pdf_file_service.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.AdditionalPropertiesValue;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -15,9 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-//TODO
-// Add unit test for controller
 
 @Slf4j
 @RestController
@@ -33,7 +33,7 @@ public class FileController {
 
     @Operation(summary = "Merge multiple PDFs", description = "Merges multiple PDF files into one")
     @PostMapping(path = "/merge", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<byte[]> mergePdfs(@RequestParam("files") MultipartFile[] files) throws IOException, IllegalArgumentException {
+    public ResponseEntity<byte[]> mergePdfs(@RequestPart(required = true) MultipartFile[] files) throws IOException, IllegalArgumentException {
         log.info("POST /api/v1/files/merge {} files", files.length);
 
             byte[] mergedPdf = fileService.mergePdfs(files);
